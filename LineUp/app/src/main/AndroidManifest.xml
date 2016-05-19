@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unist.am.lineup" >
+    <supports-screens android:anyDensity="true" />
+    <uses-sdk android:minSdkVersion="4" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        >
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_app_key" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity android:name=".MyPageActivity" />
+        <activity android:name=".SettingActivity"/>
+        <activity android:name=".PushalarmActivity"/>
+        <activity android:name=".ClauseActivity"/>
+        <activity android:name=".InquireActivity"/>
+        <activity android:name=".VersionActivity"/>
+        <activity android:name=".LoginActivity" >
+        </activity>
+        <activity android:name=".TableActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".MapActivity" />
+        <activity android:name="MapActivity_all_reslist"/>
+        <activity android:name=".SignUpActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RestaurantInfo" >
+        </activity>
+        <activity android:name=".ConfirmActivity" >
+        </activity>
+        <activity android:name=".OwnerActivity"></activity>
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.example.owner.queuing" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GcmIntentService" />
+    </application>
+
+</manifest>
