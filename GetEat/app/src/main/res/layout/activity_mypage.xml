@@ -1,0 +1,41 @@
+<ru.noties.scrollable.ScrollableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/scrollable_layout"
+    app:scrollable_maxScroll="300dp"
+    app:scrollable_considerIdleMillis="125"
+    app:scrollable_friction="0.075"
+    app:scrollable_closeUpAnimationMillis="250"
+    app:scrollable_defaultCloseUp="true"
+    app:scrollable_scrollerFlywheel="false"
+    app:scrollable_closeUpAnimatorInterpolator="@android:anim/accelerate_decelerate_interpolator">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/my_page_header"
+            layout="@layout/activity_mypage_header"
+            />
+
+                <com.unist.db.geteat.TabsLayout_myPage
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/tabs_height"
+                    android:background="@color/white"
+                    android:id="@+id/mypage_tabs" />
+
+
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/tabs_height"
+        android:id="@+id/mypage_view_pager" />
+
+</ru.noties.scrollable.ScrollableLayout>
