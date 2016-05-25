@@ -61,4 +61,11 @@
     <string name="Halmae">할매집</string>
     <string name="complete">라인업 완료되었습니다.</string>
     <string name="repetition">이미 라인업하셨습니다.</string>
+    <string name="partylist">파티 목록</string>
+    <string name="finding_party">파티  찾기</string>
+    <string name="new_party">+ 새 파티 생성</string>
+    <string name="party_participate">파티  참여</string>
+    <string name="available_party">현재 참여 가능한 파티</string>
+    <string name="party_name">이름</string>
+    <string name="party_time">시간</string>
 </resources>
