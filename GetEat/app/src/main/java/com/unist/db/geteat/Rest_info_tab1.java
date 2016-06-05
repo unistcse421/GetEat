@@ -26,10 +26,11 @@ public class Rest_info_tab1 extends BaseFragment {
 
     String name = null;
     String cuisine = null;
-    String timing = null;
+    String start = null;
+    String end = null;
+    String Delivery_Fee = null;
+    String Delivery_Min = null;
     String location = null;
-    Double x_coordinate = null;
-    Double y_coordinate = null;
     String phone_num = null;
     String dummyname=null;
     String username=null;
@@ -57,10 +58,11 @@ public class Rest_info_tab1 extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         name=getArguments().getString("name");
         cuisine=getArguments().getString("cuisine");
-        timing=getArguments().getString("timing");
+        start=getArguments().getString("start");
+        end=getArguments().getString("end");
+        Delivery_Fee=getArguments().getString("Delivery_Fee");
+        Delivery_Min=getArguments().getString("Delivery_Min");
         location=getArguments().getString("location");
-        x_coordinate=getArguments().getDouble("x_coordinate");
-        y_coordinate=getArguments().getDouble("y_coordinate");
         phone_num=getArguments().getString("phone_num");
         dummyname=getArguments().getString("dummy_name");
         username=getArguments().getString("username");
@@ -75,7 +77,7 @@ public class Rest_info_tab1 extends BaseFragment {
         resinfo_location=(TextView) view.findViewById(R.id.res_location);
         resinfo_phone_num=(TextView)view.findViewById(R.id.res_phonenum);
 
-        resinfo_timing.setText(timing);
+        resinfo_timing.setText(start + " ~ " + end);
         resinfo_cuisine.setText(cuisine);
         resinfo_location.setText(location);
         resinfo_phone_num.setText(phone_num);
@@ -84,7 +86,7 @@ public class Rest_info_tab1 extends BaseFragment {
         go_to_map_btn = (RelativeLayout) view.findViewById(R.id.go_to_map);
         menu = (LinearLayout) view.findViewById(R.id.menu);
 
-        go_to_map_btn.setOnClickListener(new View.OnClickListener() {
+        /*go_to_map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent map_intent = new Intent(parent_context, MapActivity.class);
@@ -93,7 +95,7 @@ public class Rest_info_tab1 extends BaseFragment {
                 map_intent.putExtra("lon",y_coordinate);
                 startActivityForResult(map_intent,1);
             }
-        });
+        });*/
         menuDialog = new Menu_Dialog(parent_context,dummyname);
         menuDialog.setTitle("메뉴");
         menuDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {

@@ -95,14 +95,14 @@ public class MapActivity_all_reslist extends Activity implements MapView.POIItem
                     Intent intent = new Intent(mcontext, RestaurantInfo.class);
                     intent.putExtra("name", Items.get(i).res_name);
                     intent.putExtra("cuisine", Items.get(i).res_cuisine);
-                    intent.putExtra("timing", Items.get(i).res_timing);
+                   // intent.putExtra("timing", Items.get(i).res_timing);
                     intent.putExtra("img_large", Items.get(i).res_imgurl);
                     intent.putExtra("location", Items.get(i).res_location);
                     intent.putExtra("phone_num", Items.get(i).res_phone_num);
-                    intent.putExtra("x_coordinate", Items.get(i).res_x_coordinate);
-                    intent.putExtra("y_coordinate", Items.get(i).res_y_coordinate);
+                  //  intent.putExtra("x_coordinate", Items.get(i).res_x_coordinate);
+                  //  intent.putExtra("y_coordinate", Items.get(i).res_y_coordinate);
                     intent.putExtra("username", nickname);
-                    intent.putExtra("dummy_name", Items.get(i).res_dummyname);
+                 //   intent.putExtra("dummy_name", Items.get(i).res_dummyname);
 
                     startActivity(intent);
                     break;

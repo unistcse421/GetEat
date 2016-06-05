@@ -24,8 +24,8 @@ public class Mypage_tab4 extends BaseFragment_myPage {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.mypage_tab04, parent, false);
-        mScrollView = findView(view, R.id.scroll_view_my_tab04);
+        final View view = inflater.inflate(R.layout.my_partylist, parent, false);
+    //    mScrollView = findView(view, R.id.scroll_view_my_tab04);
         return view;
     }
 

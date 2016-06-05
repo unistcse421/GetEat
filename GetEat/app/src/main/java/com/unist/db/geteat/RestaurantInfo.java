@@ -34,11 +34,12 @@ public class RestaurantInfo extends BaseActivity {
     String name = null;
     String cuisine = null;
     String img_large = null;
-    String timing = null;
     String location = null;
-    Double x_coordinate = null;
-    Double y_coordinate = null;
     String phone_num = null;
+    String Delivery_Fee = null;
+    String Delivery_Min = null;
+    String start = null;
+    String end = null;
     String dummyname;
 
     RelativeLayout lineup_btn;
@@ -65,11 +66,13 @@ public class RestaurantInfo extends BaseActivity {
         img_large = intent.getExtras().getString("img_large");
         name = intent.getExtras().getString("name");
         cuisine = intent.getExtras().getString("cuisine");
-        timing = intent.getExtras().getString("timing");
+        start = intent.getExtras().getString("start");
+        end = intent.getExtras().getString("end");
+        Delivery_Fee = intent.getExtras().getString("Delivery_Fee");
+        Delivery_Min = intent.getExtras().getString("Delivery_Min");
+
         location = intent.getExtras().getString("location");
         phone_num = intent.getExtras().getString("phone_num");
-        x_coordinate = intent.getExtras().getDouble("x_coordinate");
-        y_coordinate = intent.getExtras().getDouble("y_coordinate");
         username = intent.getExtras().getString("username");
         dummyname = intent.getExtras().getString("dummy_name");
         this.setResult(Activity.RESULT_OK);
@@ -87,11 +90,12 @@ public class RestaurantInfo extends BaseActivity {
         rb.putString("img_large",img_large);
         rb.putString("name",name);
         rb.putString("cuisine",cuisine);
-        rb.putString("timing",timing);
+        rb.putString("start",start);
+        rb.putString("start",end);
+        rb.putString("start",Delivery_Fee);
+        rb.putString("start",Delivery_Min);
         rb.putString("location",location);
         rb.putString("phone_num",phone_num);
-        rb.putDouble("x_coordinate", x_coordinate);
-        rb.putDouble("y_coordinate",y_coordinate);
         rb.putString("username", username);
         rb.putString("dummy_name",dummyname);
 
@@ -174,11 +178,12 @@ public class RestaurantInfo extends BaseActivity {
             tab01 = tab01.newInstance(mcontext);
             tab01.name = name;
             tab01.cuisine = cuisine;
-            tab01.timing = timing;
+            tab01.start = start;
+            tab01.end = end;
+            tab01.Delivery_Fee = Delivery_Fee;
+            tab01.Delivery_Min = Delivery_Min;
             tab01.location = location;
             tab01.phone_num = phone_num;
-            tab01.x_coordinate = x_coordinate;
-            tab01.y_coordinate = y_coordinate;
             tab01.dummyname = dummyname;
         }
         if (tab02 == null) {

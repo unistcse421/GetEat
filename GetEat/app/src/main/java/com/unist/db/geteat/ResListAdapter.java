@@ -51,8 +51,8 @@ public class ResListAdapter extends ArrayAdapter<ResListItem> {
             holder.res_image = (ImageView) v.findViewById(R.id.res_image);
             holder.res_name = (TextView) v.findViewById(R.id.res_name);
             //holder.res_cuisine = (TextView) v.findViewById(R.id.res_cuisine);
-            holder.res_distance = (TextView) v.findViewById(R.id.res_distance);
-            holder.res_waitpeople = (TextView) v.findViewById(R.id.res_waitpeople);
+            //holder.res_distance = (TextView) v.findViewById(R.id.res_distance);
+           // holder.res_waitpeople = (TextView) v.findViewById(R.id.res_waitpeople);
             holder.res_location = (TextView) v.findViewById(R.id.res_location);
 
             v.setTag(holder);
@@ -74,9 +74,9 @@ public class ResListAdapter extends ArrayAdapter<ResListItem> {
             //holder.res_name.setTypeface(mTypeface);
             //holder.res_cuisine.setText(res_item.res_cuisine);
             //holder.res_cuisine.setTypeface(mTypeface);
-            holder.res_distance.setText(res_item.res_distance);
+            //holder.res_distance.setText(res_item.res_distance);
             //holder.res_distance.setTypeface(mTypeface);
-            holder.res_waitpeople.setText(res_item.res_waitpeople);
+            //holder.res_waitpeople.setText(res_item.res_waitpeople);
             //holder.res_imgurl = res_item.res_imgurl;
             holder.res_location.setText(res_item.res_location);
             Picasso.with(this.context).load(res_item.res_imgurl).fit().centerCrop().into(holder.res_image);

@@ -53,15 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
     String name = null;
     String cuisine = null;
-    int waiting_people = 0;
-    String img_large = null;
-    String timing = null;
-    String location = null;
-    Double x_coordinate = null;
-    Double y_coordinate = null;
-    String phone_num = null;
-    String dummyname = null;
 
+    String img_large = null;
+    String start = null;
+    String end = null;
+    String location = null;
+    String phone_num = null;
+    String Delivery_Fee = null;
+    String Delivery_Min = null;
 
     String nickName;
     String profileImageURL ;
@@ -115,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ResListAdapter(this,R.layout.res_list_item,items);
 
         //res_listview.setEnabled(false);
-        //new getResInfo().execute("");
-        String distance = String.valueOf((int)calDistance(37.557627, 126.936976,37.558627,126.936976));
-        items.add(new ResListItem("http://www.365food.com/resource/upload/mini/chan/soon_y.gif", "치킨파티", "치킨",
-                distance, String.valueOf("123"),37.558627,126.936976,"구영리 어디쯤","하루종일","몰라","ㅋㅋ"));
+        new getResInfo().execute("");
+        //String distance = String.valueOf((int)calDistance(37.557627, 126.936976,37.558627,126.936976));
+        //items.add(new ResListItem("http://www.365food.com/resource/upload/mini/chan/soon_y.gif", "치킨파티", "치킨",
+        //       distance, String.valueOf("123"),37.558627,126.936976,"구영리 어디쯤","하루종일","몰라","ㅋㅋ"));
         res_listview.setAdapter(adapter);
         res_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -126,14 +125,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), RestaurantInfo.class);
                 intent.putExtra("name", items.get(position).res_name);
                 intent.putExtra("cuisine", items.get(position).res_cuisine);
-                intent.putExtra("timing", items.get(position).res_timing);
+                intent.putExtra("start", items.get(position).res_start);
+                intent.putExtra("end", items.get(position).res_end);
+                intent.putExtra("Delivery_Fee", items.get(position).res_fee);
+                intent.putExtra("Delivery_Min", items.get(position).res_min);
                 intent.putExtra("img_large", items.get(position).res_imgurl);
                 intent.putExtra("location", items.get(position).res_location);
                 intent.putExtra("phone_num", items.get(position).res_phone_num);
-                intent.putExtra("x_coordinate", items.get(position).res_x_coordinate);
-                intent.putExtra("y_coordinate", items.get(position).res_y_coordinate);
+
+
                 intent.putExtra("username", nickName);
-                intent.putExtra("dummy_name", items.get(position).res_dummyname);
 
                 startActivityForResult(intent, CALL_REQUEST);
             }
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... info) {
             URL url = null;
             try {
-                url = new URL("http://52.69.163.43/queuing/get_all_rest_info.php");
+                url = new URL("http://uni07.unist.ac.kr/~cs20121092/html/get_ResInfo.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setRequestMethod("POST");
@@ -250,25 +251,22 @@ public class MainActivity extends AppCompatActivity {
             String jsonall = result;
             JSONArray jArray = null;
 
-            String distance = null;
             try{
                 jArray = new JSONArray(jsonall);
                 JSONObject json_data = null;
 
                 for (int i = 0; i < jArray.length(); i++) {
                     json_data = jArray.getJSONObject(i);
-                    name = json_data.getString("name");
-                    img_large = json_data.getString("img_large");
-                    cuisine = json_data.getString("cuisine");
-                    waiting_people = json_data.getInt("waiting_people");
-                    x_coordinate = json_data.getDouble("x_coordinate");
-                    y_coordinate =json_data.getDouble("y_coordinate");
-                    location = json_data.getString("location");
-                    phone_num = json_data.getString("phone_num");
-                    timing = json_data.getString("timing");
-                    dummyname = json_data.getString("dummy_name");
-                    distance = String.valueOf((int)calDistance(37.557627, 126.936976,x_coordinate,y_coordinate));
-                    items.add(new ResListItem(img_large, name, cuisine, distance, String.valueOf(waiting_people),x_coordinate,y_coordinate,location,timing,phone_num,dummyname));
+                    name = json_data.getString("Rest_Name");
+                    img_large = json_data.getString("C_URL");
+                    cuisine = json_data.getString("Category");
+                    location = json_data.getString("Location");
+                    phone_num = json_data.getString("Number");
+                    start = json_data.getString("Hours_Start");
+                    end = json_data.getString("Hours_End");
+                    Delivery_Fee = json_data.getString("Delivery_Fee");
+                    Delivery_Min = json_data.getString("Delivery_Min");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min));
                     Log.e("PROFILE",":"+i);
 
                 }

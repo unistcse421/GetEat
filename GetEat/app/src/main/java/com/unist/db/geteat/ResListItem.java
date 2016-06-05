@@ -9,27 +9,27 @@ public class ResListItem extends ArrayList<ResListItem> {
     public String res_name;
     public String res_imgurl;
     public String res_location;
-    public Double res_x_coordinate;
-    public Double res_y_coordinate;
+    public String res_start;
+    public String res_end;
+    public String res_fee;
+    public String res_min;
     public String res_cuisine;
     public String res_phone_num;
-    public String res_timing;
-    public String res_distance;
 
-    public String res_waitpeople;
-    public String res_dummyname;
 
-    public ResListItem(String imgurl, String name, String cuisine, String distance, String waitpeople, Double x_coordinate, Double y_coordinate, String location, String timing, String phone_num, String dummyname){
+
+
+
+
+    public ResListItem(String imgurl, String name, String cuisine, String location, String phone_num, String start, String end, String Delivery_Fee, String Delivery_Min){
         this.res_imgurl = imgurl;
         this.res_name = name;
         this.res_cuisine = cuisine;
-        this.res_distance = distance;
-        this.res_waitpeople = waitpeople;
-        this.res_x_coordinate = x_coordinate;
-        this.res_y_coordinate = y_coordinate;
+        this.res_start = start;
+        this.res_end = end;
+        this.res_fee = Delivery_Fee;
+        this.res_min = Delivery_Min;
         this.res_location = location;
-        this.res_timing = timing;
         this.res_phone_num = phone_num;
-        this.res_dummyname = dummyname;
     }
 }
