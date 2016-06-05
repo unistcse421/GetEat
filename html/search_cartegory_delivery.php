@@ -3,38 +3,30 @@
 	
 	$c_name = $_GET["category"]
 	$delivery = $_GET["delivery"];
+	$desc	= $_GET["desc"];
 
 	$db_host= "localhost";
 	$db_user= "cs20121092";
 	$db_pw  = "cs20121092";
 	$db_name= "GetEat";
 	$conn = mysqli_connect($db_host,$db_user,$db_pw,$db_name);
+	$query = "select * from restaurant natural join
+				(select Rest_Name, sum(Score)/sum(People) as Score, sum(People) as People
+	 			from review group by Rest_Name)score"
 
-	if($c_name == '-1' and $delivery == '-1'){
-		$q=mysqli_query($conn,"select * from restaurant natural join
-								(select Rest_Name, sum(Score)/sum(People) as Score, sum(People) as People
-								 from review group by Rest_Name)score");
-	}
-	elseif($c_name == '-1' and $delivery != '-1'){
-		$q=mysqli_query($conn,"select * from restaurant natural join
-								(select Rest_Name, sum(Score)/sum(People) as Score, sum(People) as People
-								 from review group by Rest_Name)score
-								where Delivery_Fee = '' and Delivery_Min = ''");
-	
-	}
-	elseif($c_name != '-1' and $delivery == '-1'){
-		$q=mysqli_query($conn,"select * from restaurant natural join
-								(select Rest_Name, sum(Score)/sum(People) as Score, sum(People) as People
-								 from review group by Rest_Name)score
-								where Category = ".$c_name."");
-	
+	if($desc != '-1')
+		$query = $query." order by Score desc";
+
+	if($c_name != '-1'){
+		$query = $query." where Category = ".$c_name;
+		if($delivery != '-1'){
+			$query = $query." and Delivery_Fee = '' and Delivery_Min = ''";
+		}
 	}
 	else{
-		$q=mysqli_query($conn,"select * from restaurant natural join
-								(select Rest_Name, sum(Score)/sum(People) as Score, sum(People) as People
-								 from review group by Rest_Name)score
-								where Category = ".$c_name." and Delivery_Fee = '' and Delivery_Min = ''");
-	
+		if($delivery != '-1'){
+			$query = $query." where Delivery_Fee = '' and Delivery_Min = ''";
+		}
 	}
 	
 	//retrieve restaurant name, cuisine from table rest_info, and number from rest_line
