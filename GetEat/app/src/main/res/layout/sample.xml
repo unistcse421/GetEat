@@ -70,8 +70,9 @@
                             android:textSize="15dp"
                             android:gravity="center"
                             android:textColor="@color/maincolor"
-                            android:text="@string/Korean"/>
+                            android:text="@string/Chinese"/>
                         <ImageView
+                            android:id="@+id/first_2"
                             android:layout_below="@+id/first"
                             android:layout_alignParentRight="true"
                             android:layout_width="80dp"
@@ -86,7 +87,41 @@
                             android:textSize="15dp"
                             android:gravity="center"
                             android:textColor="@color/maincolor"
-                            android:text="@string/Chinese"/>
+                            android:text="@string/Chicken"/>
+                        <ImageView
+                            android:id="@+id/first_3"
+                            android:layout_below="@+id/first_2"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/pill_shape"/>
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_below="@+id/first_2"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:textSize="15dp"
+                            android:gravity="center"
+                            android:textColor="@color/maincolor"
+                            android:text="@string/Jjim"/>
+                        <ImageView
+                            android:id="@+id/first_4"
+                            android:layout_below="@+id/first_3"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/pill_shape"/>
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_below="@+id/first_3"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:textSize="15dp"
+                            android:gravity="center"
+                            android:textColor="@color/maincolor"
+                            android:text="@string/Jock"/>
                     </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -113,8 +148,9 @@
                             android:textSize="15dp"
                             android:gravity="center"
                             android:textColor="@color/maincolor"
-                            android:text="@string/Western"/>
+                            android:text="@string/Japanese"/>
                         <ImageView
+                            android:id="@+id/second_2"
                             android:layout_below="@+id/second"
                             android:layout_alignParentLeft="true"
                             android:layout_width="80dp"
@@ -129,7 +165,41 @@
                             android:textSize="15dp"
                             android:gravity="center"
                             android:textColor="@color/maincolor"
-                            android:text="@string/Japanese"/>
+                            android:text="@string/Dduck"/>
+                        <ImageView
+                            android:id="@+id/second_3"
+                            android:layout_below="@+id/second_2"
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/pill_shape"/>
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_below="@+id/second_2"
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:textSize="15dp"
+                            android:gravity="center"
+                            android:textColor="@color/maincolor"
+                            android:text="@string/Pizza"/>
+                        <ImageView
+                            android:id="@+id/second_4"
+                            android:layout_below="@+id/second_3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/pill_shape"/>
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_below="@+id/second_3"
+                            android:layout_alignParentLeft="true"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:textSize="15dp"
+                            android:gravity="center"
+                            android:textColor="@color/maincolor"
+                            android:text="@string/Burger"/>
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -156,16 +226,17 @@
                     android:paddingLeft="20dp"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
-                    android:text="현재 위치 기준"
+                    android:text="배달비 상관X / 무"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow"
+                <Switch
+                    android:shadowColor="@color/maincolor"
+                    android:id="@+id/switch_fee"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp" />
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -179,54 +250,16 @@
                     android:text="별점 기준"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow"
+                <Switch
+                    android:shadowColor="@color/maincolor"
+                    android:id="@+id/switch_score"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp" />
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/maincolor"
-                    android:paddingLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:textSize="15dp"
-                    android:text="대기 인원 많은 순"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/maincolor"
-                    android:paddingLeft="20dp"
-                    android:gravity="center_vertical"
-                    android:textSize="15dp"
-                    android:text="대기 인원 적은 순"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/right_arrow"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp" />
-            </RelativeLayout>
+
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>
