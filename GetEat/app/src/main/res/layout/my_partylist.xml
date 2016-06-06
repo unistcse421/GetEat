@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
+        android:id="@+id/party_top"
         >
         <TextView
             android:layout_width="match_parent"
@@ -18,43 +19,16 @@
             android:layout_marginLeft="15dp"
             android:textSize="20dp"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <ListView
+        android:id="@+id/partyList"
         android:layout_weight="0.83"
-        android:weightSum="10"
-        android:orientation="vertical"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7.5"
-            android:weightSum="1"
-            >
-            <ListView
-                android:id="@+id/party_list"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight = "1"
-                >
-            </ListView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:gravity="center"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/new_party"
-                android:background="@drawable/round_box_selected"
-                android:elevation="3dp"
-                android:textSize="23dp"/>
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        ></ListView>
+
     <LinearLayout
+        android:id="@+id/new_party_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07">
@@ -62,8 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/finding_party"
-            android:textSize="30dp"
+            android:background="@color/maincolor"
+            android:textColor="@color/white"
+            android:text="새 파티 생성"
+            android:textSize="25dp"
             android:elevation="8dp"/>
     </LinearLayout>
 </LinearLayout>

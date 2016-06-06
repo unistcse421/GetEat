@@ -1,0 +1,61 @@
+{
+  "project_info": {
+    "project_number": "353457753566",
+    "project_id": "geteat-d0151"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353457753566:android:abf21a62f500030e",
+        "android_client_info": {
+          "package_name": "com.unist.db.geteat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu7ZqQIiLqAXSPCkbKDPl9fDCudVIaO-8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353457753566:android:335bd2aab7d15be7",
+        "android_client_info": {
+          "package_name": "com.unist.am.lineup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu7ZqQIiLqAXSPCkbKDPl9fDCudVIaO-8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

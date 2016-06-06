@@ -33,12 +33,12 @@ public class SignUpActivity extends Activity {
     private static final String PROPERTY_APP_VERSION = "1.0";
     private static final String TAG = "NPC";
     private BackPressCloseHandler backPressCloseHandler;
-    private String SENDER_ID = "855721226478";
+    private String SENDER_ID = "353457753566";
     private String User_ID = "null";
     GoogleCloudMessaging gcm;
     private String regid;
     private Context context;
-
+    DBManager_myinfo myinfo;
     String nickName;
     String profileImageURL ;
     String thumbnailURL ;
@@ -58,6 +58,7 @@ public class SignUpActivity extends Activity {
         Session.initialize(this);
         // For GCM Client
         context = getApplicationContext();
+        myinfo = new DBManager_myinfo(this,"MY_INFO",null,1);
         gcm = GoogleCloudMessaging.getInstance(this);
         regid = getRegistrationId(context);
         if (regid.isEmpty()) {
@@ -100,6 +101,18 @@ public class SignUpActivity extends Activity {
         finish();
     }
 
+    protected void redirectAdditionalActivity() {
+        if(myinfo.returnName()!= "nothing") {
+            final Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else{
+            final Intent intent = new Intent(SignUpActivity.this, Addsetting.class);
+            intent.putExtra("regid",regid);
+            startActivity(intent);
+        }
+        finish();
+    }
     protected void redirectLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
@@ -119,8 +132,9 @@ public class SignUpActivity extends Activity {
                 nickName=userProfile.getNickname();
                 profileImageURL=userProfile.getProfileImagePath();
                 thumbnailURL=userProfile.getThumbnailImagePath();
-                Log.e("regId",":"+regid);
-                redirectMainActivity();
+                Log.e("regId", ":" + regid);
+                //redirectMainActivity();
+                redirectAdditionalActivity();
             }
 
             @Override
@@ -213,6 +227,7 @@ public class SignUpActivity extends Activity {
                     // Require the user to click a button again, or perform
                     // exponential back-off.
                 }
+                Log.e("REGISTER_ERR",msg);
                 return msg;
             }
 
