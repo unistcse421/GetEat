@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.unist.db.geteat.R;
 
@@ -62,6 +63,10 @@ public class MenuSelectActivity extends AppCompatActivity {
     TextView menu_price;
 
     LinearLayout find_party;
+
+    boolean flag1=false;
+    boolean flag2=false;
+    boolean flag3=false;
 
 
 
@@ -114,6 +119,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0) flag1=true;
                 TextView tmp = (TextView) view;
                 selected_category = (String) tmp.getText();
                 menu_some.clear();
@@ -135,6 +141,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0) flag2=true;
                 TextView tmp = (TextView) view;
                 selected_menu = (String) tmp.getText();
             }
@@ -147,6 +154,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         sp3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0) flag3=true;
                 TextView tmp = (TextView) view;
                 selected_number = (String) tmp.getText();
             }
@@ -159,15 +167,18 @@ public class MenuSelectActivity extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orders.add(new OrderListItem(selected_menu, selected_number));
-                order_adapter.notifyDataSetChanged();
-                for (int i = 0; i < menu.size(); i++) {
-                    if (selected_menu.equals(menu.get(i).menu_name))
-                        price = Integer.parseInt(menu.get(i).menu_price);
+                if (flag1 && flag2 && flag3) {
+                    orders.add(new OrderListItem(selected_menu, selected_number));
+                    order_adapter.notifyDataSetChanged();
+                    for (int i = 0; i < menu.size(); i++) {
+                        if (selected_menu.equals(menu.get(i).menu_name))
+                            price = Integer.parseInt(menu.get(i).menu_price);
+                    }
+                    sum += price * Integer.parseInt(selected_number);
+                    sum_string = Integer.toString(sum);
+                    menu_price.setText(sum_string);
                 }
-                sum += price*Integer.parseInt(selected_number);
-                sum_string = Integer.toString(sum);
-                menu_price.setText(sum_string);
+                else Toast.makeText(MenuSelectActivity.this,"잘못된 선택입니다",Toast.LENGTH_SHORT).show();
             }
         });
         find_party.setOnClickListener(new View.OnClickListener() {
@@ -226,11 +237,18 @@ public class MenuSelectActivity extends AppCompatActivity {
                 JSONObject json_data = null;
 
                 for (int i = 0; i < jArray.length(); i++) {
+                    boolean flag = true;
                     json_data = jArray.getJSONObject(i);
                     name = json_data.getString("Menu_Name");
                     menu_category = json_data.getString("Category");
                     price = json_data.getString("Price");
-                    category.add(menu_category);
+                    for(int j=0;j<category.size();j++){
+                        if(category.get(j).equals(menu_category)) flag = false;
+                    }
+                    if(flag) {
+                        Log.e("COFIRM:",menu_category);
+                        category.add(menu_category);
+                    }
                     menu.add(new MenuItem(menu_category,name,price));
 
                     Log.e("PROFILE",":"+i);
