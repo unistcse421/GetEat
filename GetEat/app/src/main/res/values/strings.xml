@@ -64,7 +64,7 @@
     <string name="Pizza">피자</string>
     <string name="Jock">족발&amp;보쌈</string>
     <string name="Burger">햄버거</string>
-
+    <string name="gcm_defaultSenderID">353457753566</string>
     <string name="Halmae">할매집</string>
     <string name="complete">라인업 완료되었습니다.</string>
     <string name="repetition">이미 라인업하셨습니다.</string>

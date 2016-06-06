@@ -19,6 +19,8 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.UserProfile;
 import com.kakao.util.helper.log.Logger;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import java.io.IOException;
 
 /**
@@ -27,6 +29,8 @@ import java.io.IOException;
 public class SignUpActivity extends Activity {
     // For GCM Client variables
     public static final String PROPERTY_REG_ID = "registration_id";
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
     public static final String OWN_PREFS ="OWNER_PREFS";
     // SharedPreferences에 저장할 때 key 값으로 사용됨.
     // SharedPreferences에 저장할 때 key 값으로 사용됨.
@@ -61,6 +65,14 @@ public class SignUpActivity extends Activity {
         myinfo = new DBManager_myinfo(this,"MY_INFO",null,1);
         gcm = GoogleCloudMessaging.getInstance(this);
         regid = getRegistrationId(context);
+
+        /*if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }*/
+        Intent intent_reg = new Intent(this, RegistrationIntentService.class);
+        startService(intent_reg);
         if (regid.isEmpty()) {
             Log.i(TAG,"PASS");
             registerInBackground();
@@ -129,9 +141,9 @@ public class SignUpActivity extends Activity {
             public void onSuccess(final UserProfile userProfile) {
                 Log.d("SUCCESS", "UserProfile : " + userProfile);
                 userProfile.saveUserToCache();
-                nickName=userProfile.getNickname();
-                profileImageURL=userProfile.getProfileImagePath();
-                thumbnailURL=userProfile.getThumbnailImagePath();
+                nickName = userProfile.getNickname();
+                profileImageURL = userProfile.getProfileImagePath();
+                thumbnailURL = userProfile.getThumbnailImagePath();
                 Log.e("regId", ":" + regid);
                 //redirectMainActivity();
                 redirectAdditionalActivity();
@@ -249,6 +261,21 @@ public class SignUpActivity extends Activity {
         editor.commit();
     }
 
+   /* private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }*/
     private void sendRegistrationIdToBackend() {
 
         DBManager_regid manager = new DBManager_regid(getApplicationContext(), "regid_info.db", null, 1);
