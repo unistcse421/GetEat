@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String category_name = "-1";
     String delivery = "-1";
     String desc = "-1";
+    String res_id = null;
+
     String nickName;
     String profileImageURL ;
     String thumbnailURL ;
@@ -217,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("img_large", items.get(position).res_imgurl);
                 intent.putExtra("location", items.get(position).res_location);
                 intent.putExtra("phone_num", items.get(position).res_phone_num);
-
+                intent.putExtra("res_id",items.get(position).res_id);
 
                 intent.putExtra("username", nickName);
 
@@ -464,7 +466,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     end = json_data.getString("Hours_End");
                     Delivery_Fee = json_data.getString("Delivery_Fee");
                     Delivery_Min = json_data.getString("Delivery_Min");
-                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min));
+                    res_id = json_data.getString("Rest_ID");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id));
                     Log.e("PROFILE",":"+i);
 
                 }
@@ -532,7 +535,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     end = json_data.getString("Hours_End");
                     Delivery_Fee = json_data.getString("Delivery_Fee");
                     Delivery_Min = json_data.getString("Delivery_Min");
-                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min));
+                    res_id = json_data.getString("Rest_ID");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id));
                     Log.e("PROFILE",":"+i);
 
                 }

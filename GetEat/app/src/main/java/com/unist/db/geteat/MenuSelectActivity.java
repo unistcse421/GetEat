@@ -55,6 +55,7 @@ public class MenuSelectActivity extends AppCompatActivity {
     RelativeLayout add_btn;
 
     String resname;
+    String res_id;
     String sum_string;
     int sum=0;
     int price;
@@ -70,6 +71,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_select);
         Intent intent = getIntent();
         resname =intent.getExtras().getString("resname");
+        res_id = intent.getExtras().getString("res_id");
         category = new ArrayList<String>();
         menu = new ArrayList<MenuItem>();
         menu_some = new ArrayList<String>();
@@ -163,7 +165,7 @@ public class MenuSelectActivity extends AppCompatActivity {
                     if (selected_menu.equals(menu.get(i).menu_name))
                         price = Integer.parseInt(menu.get(i).menu_price);
                 }
-                sum += price;
+                sum += price*Integer.parseInt(selected_number);
                 sum_string = Integer.toString(sum);
                 menu_price.setText(sum_string);
             }
@@ -191,7 +193,7 @@ public class MenuSelectActivity extends AppCompatActivity {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setRequestMethod("POST");
-                String post_value = "name="+resname;
+                String post_value = "rest_id="+res_id;
 
                 OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
                 osw.write(post_value);

@@ -41,6 +41,7 @@ public class RestaurantInfo extends BaseActivity {
     String start = null;
     String end = null;
     String dummyname;
+    String res_id;
 
     RelativeLayout lineup_btn;
 
@@ -75,6 +76,7 @@ public class RestaurantInfo extends BaseActivity {
         phone_num = intent.getExtras().getString("phone_num");
         username = intent.getExtras().getString("username");
         dummyname = intent.getExtras().getString("dummy_name");
+        res_id = intent.getExtras().getString("res_id");
         this.setResult(Activity.RESULT_OK);
 
         resinfo_image = (ImageView) findViewById(R.id.res_image);
@@ -152,6 +154,7 @@ public class RestaurantInfo extends BaseActivity {
                 intent.putExtra("username",username);
                 intent.putExtra("resname",name);
                 intent.putExtra("dummy_name",dummyname);
+                intent.putExtra("res_id",res_id);
                 startActivity(intent);
             }
         });
