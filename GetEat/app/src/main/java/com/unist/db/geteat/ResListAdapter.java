@@ -36,7 +36,10 @@ public class ResListAdapter extends ArrayAdapter<ResListItem> {
         //mTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/Questrial_Regular.otf");
         //mBoldTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/Quicksand_Bold.otf");
     }
-
+    public void clearItems() {
+        // clear the data
+        items.clear();
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         View v = convertView;
