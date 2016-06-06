@@ -1,21 +1,34 @@
 package com.unist.db.geteat;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +57,7 @@ public class RestaurantInfo extends BaseActivity {
     String res_id;
 
     RelativeLayout lineup_btn;
-
+    TextView add_star;
     ImageView resinfo_image;
     TextView resinfo_name;
     TextView resinfo_cuisine;
@@ -54,10 +67,10 @@ public class RestaurantInfo extends BaseActivity {
     TextView resinfo_phone_num;
     TextView resinfo_webpage;
     LinearLayout frame;
-
+    ImageView star01, star02, star03, star04, star05;
     int width_image;
     int height_image;
-
+    String rate ="0";
     String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +91,7 @@ public class RestaurantInfo extends BaseActivity {
         dummyname = intent.getExtras().getString("dummy_name");
         res_id = intent.getExtras().getString("res_id");
         this.setResult(Activity.RESULT_OK);
-
+        add_star = (TextView) findViewById(R.id.add_star);
         resinfo_image = (ImageView) findViewById(R.id.res_image);
         resinfo_name = (TextView) findViewById(R.id.res_name);
         resinfo_name.setText(name);
@@ -87,7 +100,6 @@ public class RestaurantInfo extends BaseActivity {
 
         final View header = findViewById(R.id.header);
         final TabsLayout tabs = findView(R.id.tabs);
-
         Bundle rb = new Bundle();
         rb.putString("img_large",img_large);
         rb.putString("name",name);
@@ -145,7 +157,94 @@ public class RestaurantInfo extends BaseActivity {
             });
         }
 
+        add_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final View dialog = getLayoutInflater().inflate(R.layout.dialog_add_star, null);
 
+                AlertDialog.Builder builder= new AlertDialog.Builder(RestaurantInfo.this);
+
+                star01 =  (ImageView) dialog.findViewById(R.id.star_01);
+                star02 = (ImageView) dialog.findViewById(R.id.star_02);
+                star03 = (ImageView) dialog.findViewById(R.id.star_03);
+                star04 = (ImageView) dialog.findViewById(R.id.star_04);
+                star05 = (ImageView) dialog.findViewById(R.id.star_05);
+                star01.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rate="1";
+                        star01.setImageResource(R.drawable.fullstar);
+                        star02.setImageResource(R.drawable.empty_star);
+                        star03.setImageResource(R.drawable.empty_star);
+                        star04.setImageResource(R.drawable.empty_star);
+                        star05.setImageResource(R.drawable.empty_star);
+                    }
+                });
+                star02.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rate="2";
+                        star01.setImageResource(R.drawable.fullstar);
+                        star02.setImageResource(R.drawable.fullstar);
+                        star03.setImageResource(R.drawable.empty_star);
+                        star04.setImageResource(R.drawable.empty_star);
+                        star05.setImageResource(R.drawable.empty_star);
+                    }
+                });
+                star03.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rate="3";
+                        star01.setImageResource(R.drawable.fullstar);
+                        star02.setImageResource(R.drawable.fullstar);
+                        star03.setImageResource(R.drawable.fullstar);
+                        star04.setImageResource(R.drawable.empty_star);
+                        star05.setImageResource(R.drawable.empty_star);
+                    }
+                });
+                star04.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rate="4";
+                        star01.setImageResource(R.drawable.fullstar);
+                        star02.setImageResource(R.drawable.fullstar);
+                        star03.setImageResource(R.drawable.fullstar);
+                        star04.setImageResource(R.drawable.fullstar);
+                        star05.setImageResource(R.drawable.empty_star);
+                    }
+                });
+                star05.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rate="5";
+                        star01.setImageResource(R.drawable.fullstar);
+                        star02.setImageResource(R.drawable.fullstar);
+                        star03.setImageResource(R.drawable.fullstar);
+                        star04.setImageResource(R.drawable.fullstar);
+                        star05.setImageResource(R.drawable.fullstar);
+                    }
+                });
+                builder.setView(dialog);
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        new add_star().execute(name,rate);
+                        Toast.makeText(getApplicationContext(), "별점을 달았습니다.", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dial=builder.create();
+                dial.setCanceledOnTouchOutside(false);
+                dial.show();
+            }
+        });
         lineup_btn = (RelativeLayout) header.findViewById(R.id.lineup_btn);
         lineup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +266,7 @@ public class RestaurantInfo extends BaseActivity {
 
 
     }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(ARG_LAST_SCROLL_Y, mScrollableLayout.getScrollY());
@@ -204,5 +304,45 @@ public class RestaurantInfo extends BaseActivity {
         height_image = frame.getHeight();
         width_image = frame.getWidth();
         Picasso.with(getApplicationContext()).load(img_large).resize(width_image, height_image).centerCrop().into(resinfo_image);
+    }
+    public class add_star extends AsyncTask<String,Void,String> {
+        String sResult="error";
+        @Override
+        protected String doInBackground(String... info) {
+            URL url = null;
+            try {
+                url = new URL("http://uni07.unist.ac.kr/~cs20121092/html/add_review.php");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("POST");
+                String post_value = "name=" + info[0] + "&" +"score=" +info[1];
+                Log.d("POST_VALUE", post_value);
+                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+                osw.write(post_value);
+                osw.flush();
+
+                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                BufferedReader reader = new BufferedReader(tmp);
+                StringBuilder builder = new StringBuilder();
+                String str;
+                while ((str = reader.readLine()) != null) {
+                    builder.append(str);
+                }
+                sResult = builder.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            return sResult;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            Log.e("RESULT",result);
+            String jsonall = result;
+            JSONArray jArray = null;
+
+        }
     }
 }
