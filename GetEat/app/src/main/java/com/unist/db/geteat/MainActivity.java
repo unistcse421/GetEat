@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.e("OnCreate:", "MainActivity");
         backPressCloseHandler = new BackPressCloseHandler(this);
         requestMe();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

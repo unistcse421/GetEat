@@ -50,19 +50,33 @@
                 android:text="@string/new_party"
                 android:background="@drawable/round_box_selected"
                 android:elevation="8dp"
-                android:textSize="23dp"/>
+                android:textSize="23dp"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.07">
+        android:layout_weight="0.07"
+        android:background="@color/maincolor">
         <TextView
+            android:visibility="gone"
+            android:id="@+id/find_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/finding_party"
             android:textSize="30dp"
-            android:elevation="8dp"/>
-    </LinearLayout>
+            android:elevation="8dp"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:id="@+id/call_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="전화 걸기"
+            android:textSize="30dp"
+            android:elevation="8dp"
+            android:textColor="#FFFFFF"/>
+    </FrameLayout>
 </LinearLayout>

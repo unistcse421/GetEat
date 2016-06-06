@@ -4,17 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scroll_view_my_tab01">
-
-    <LinearLayout
-        android:orientation="vertical"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/layout_1"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="@string/no_rec"/>
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="@string/no_rec"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ListView
+                android:id="@+id/history_list"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+            </ListView>
+        </LinearLayout>
+    </FrameLayout>
+
 
 </ScrollView>
