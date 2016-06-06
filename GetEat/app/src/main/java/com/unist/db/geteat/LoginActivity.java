@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("OnCreate:","LoginActivity");
         setContentView(R.layout.activity_login);
         backPressCloseHandler = new BackPressCloseHandler(this);
         kakaoLogin = (LoginButton) findViewById(R.id.kakao_login);

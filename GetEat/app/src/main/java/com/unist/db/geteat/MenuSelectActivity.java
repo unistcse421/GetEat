@@ -67,6 +67,9 @@ public class MenuSelectActivity extends AppCompatActivity {
     boolean flag1=false;
     boolean flag2=false;
     boolean flag3=false;
+    boolean flag4=false;
+
+    String phone_num;
 
 
 
@@ -77,6 +80,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         Intent intent = getIntent();
         resname =intent.getExtras().getString("resname");
         res_id = intent.getExtras().getString("res_id");
+        phone_num = intent.getExtras().getString("phone_num");
         category = new ArrayList<String>();
         menu = new ArrayList<MenuItem>();
         menu_some = new ArrayList<String>();
@@ -120,6 +124,8 @@ public class MenuSelectActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0) flag1=true;
+                else            flag3=false;
+
                 TextView tmp = (TextView) view;
                 selected_category = (String) tmp.getText();
                 menu_some.clear();
@@ -130,7 +136,6 @@ public class MenuSelectActivity extends AppCompatActivity {
                     }
                 }
                 sp2_adapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -142,6 +147,8 @@ public class MenuSelectActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0) flag2=true;
+                else            flag2=false;
+
                 TextView tmp = (TextView) view;
                 selected_menu = (String) tmp.getText();
             }
@@ -155,6 +162,7 @@ public class MenuSelectActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position!=0) flag3=true;
+                else            flag3=false;
                 TextView tmp = (TextView) view;
                 selected_number = (String) tmp.getText();
             }
@@ -177,6 +185,7 @@ public class MenuSelectActivity extends AppCompatActivity {
                     sum += price * Integer.parseInt(selected_number);
                     sum_string = Integer.toString(sum);
                     menu_price.setText(sum_string);
+                    flag4 = true;
                 }
                 else Toast.makeText(MenuSelectActivity.this,"잘못된 선택입니다",Toast.LENGTH_SHORT).show();
             }
@@ -184,8 +193,14 @@ public class MenuSelectActivity extends AppCompatActivity {
         find_party.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),FindingPartyActivity.class);
-                startActivity(intent);
+                if(flag4) {
+                    Intent intent = new Intent(getApplicationContext(), FindingPartyActivity.class);
+                    intent.putExtra("resname", resname);
+                    intent.putExtra("price", sum_string);
+                    intent.putExtra("phone_num", phone_num);
+                    startActivity(intent);
+                }
+                else Toast.makeText(MenuSelectActivity.this,"선택을 완료해 주십시오",Toast.LENGTH_SHORT).show();
             }
         });
 

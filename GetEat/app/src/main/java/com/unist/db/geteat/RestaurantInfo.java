@@ -155,6 +155,7 @@ public class RestaurantInfo extends BaseActivity {
                 intent.putExtra("resname",name);
                 intent.putExtra("dummy_name",dummyname);
                 intent.putExtra("res_id",res_id);
+                intent.putExtra("phone_num",phone_num);
                 startActivity(intent);
             }
         });
