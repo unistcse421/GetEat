@@ -1,6 +1,7 @@
 /*
     Server
 */
+use GetEat;
 create table restaurant(
     Rest_Name   varchar(50) primary key,
     Category    varchar(50) not null,
@@ -10,7 +11,8 @@ create table restaurant(
     Hours_End   varchar(30),
     Delivery_Fee varchar(10),
     Delivery_Min varchar(10),
-	URL			varchar(150)
+	URL			varchar(150),
+	C_URL		varchar(150)
 );
 create table menu(
     Rest_Name   varchar(50),
@@ -24,9 +26,10 @@ create table menu(
 );
 
 create table review(
+	Date	varchar(30),
     Rest_name varchar(50),
     Score   varchar(5),
-    People  int,
+	People	int,
     foreign key (Rest_name) references restaurant
 );
 
@@ -45,7 +48,7 @@ create table party(
     User_ID     varchar(30),
     Location    varchar(30),
     Price       varchar(10),
-    primary key (Party_Name, Leader_ID)
+    primary key (Party_Name, User_ID)
 );
 create table ordered(
     Order_ID varchar(30) primary key,

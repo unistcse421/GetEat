@@ -148,7 +148,7 @@ public class RestaurantInfo extends BaseActivity {
         lineup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ConfirmActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MenuSelectActivity.class);
                 intent.putExtra("username",username);
                 intent.putExtra("resname",name);
                 intent.putExtra("dummy_name",dummyname);
