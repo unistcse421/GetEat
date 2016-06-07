@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String desc = "-1";
     String res_id = null;
     String score;
-
+    String people;
     String nickName;
     String profileImageURL ;
     String thumbnailURL ;
@@ -224,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("phone_num", items.get(position).res_phone_num);
                 intent.putExtra("res_id",items.get(position).res_id);
                 intent.putExtra("score", items.get(position).score);
+                intent.putExtra("People",items.get(position).num_people);
                 intent.putExtra("username", nickName);
 
                 startActivityForResult(intent, CALL_REQUEST);
@@ -471,7 +472,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Delivery_Min = json_data.getString("Delivery_Min");
                     res_id = json_data.getString("Rest_ID");
                     score = json_data.getString("Score");
-                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id,score));
+                    people = json_data.getString("People");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id,score,people));
                     Log.e("PROFILE",":"+i);
 
                 }
@@ -541,7 +543,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Delivery_Min = json_data.getString("Delivery_Min");
                     res_id = json_data.getString("Rest_ID");
                     score = json_data.getString("Score");
-                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id,score));
+                    people = json_data.getString("People");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id,score,people));
                     Log.e("PROFILE",":"+i);
 
                 }

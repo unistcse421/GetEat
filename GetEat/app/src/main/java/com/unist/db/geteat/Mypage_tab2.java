@@ -109,8 +109,32 @@ public class Mypage_tab2 extends BaseFragment_myPage {
         fList.setAdapter(adapter);
         fList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                final View dialog = inflater.inflate(R.layout.dialog_end_debt, null);
+                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                builder.setView(dialog);
+                builder.setPositiveButton("완료", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        manager_friend.endDebt(friends.get(position).name);
+                        String name = friends.get(position).name;
+                        String bank = friends.get(position).bank;
+                        String account = friends.get(position).account;
 
+                        friends.set(position,new FrientListItem(name,bank,account,"0"));
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getActivity(), "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dial=builder.create();
+                dial.setCanceledOnTouchOutside(false);
+                dial.show();
                 //Making Dialog
                 //confirm update items
                 //set notify adpater

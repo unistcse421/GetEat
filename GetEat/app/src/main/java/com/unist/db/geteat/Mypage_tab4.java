@@ -56,7 +56,7 @@ public class Mypage_tab4 extends BaseFragment_myPage {
         parties = new ArrayList<PartyListItem>();
         adapter = new PartyListAdapter((Context)getActivity(),R.layout.my_partyitem,parties);
         //new getMyParties().execute(myinfo.returnUser_ID());
-        new getMyParties().execute("A00001");
+        new getMyParties().execute("A00002");
         return view;
     }
 

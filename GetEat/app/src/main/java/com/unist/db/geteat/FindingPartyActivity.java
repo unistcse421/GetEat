@@ -42,6 +42,8 @@ public class FindingPartyActivity extends AppCompatActivity {
     String resname;
     String price;
     String phone_num;
+    private String f_name;
+    private String debt;
     private String l_name;
     private String p_name;
     private String mParty_name;
@@ -52,6 +54,7 @@ public class FindingPartyActivity extends AppCompatActivity {
     private PartyListAdapter adapter;
     private ArrayList<PartyListItem> parties;
     private ArrayList<String> s_menu;
+    private ArrayList<String> s_menu_id;
     private ArrayList<String> s_number;
     DBManager_friend manager_friend;
     @Override
@@ -63,6 +66,7 @@ public class FindingPartyActivity extends AppCompatActivity {
         price = intent.getExtras().getString("price");
         phone_num = intent.getExtras().getString("phone_num");
         s_menu = intent.getExtras().getStringArrayList("s_menu");
+        s_menu_id = intent.getExtras().getStringArrayList("s_menu_id");
         s_number = intent.getExtras().getStringArrayList("s_number");
         manager_friend = new DBManager_friend(FindingPartyActivity.this,"FRIEND.db",null,1);
 
@@ -70,7 +74,7 @@ public class FindingPartyActivity extends AppCompatActivity {
         parties = new ArrayList<PartyListItem>();
         adapter = new PartyListAdapter(getApplicationContext(),R.layout.my_partyitem,parties);
         pList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        new getMyParties().execute("A00001");
+        new getMyParties().execute("A00002");
 
         final EditText edit = new EditText(this);
         final AlertDialog.Builder dialog = new AlertDialog.Builder(FindingPartyActivity.this);
@@ -88,16 +92,16 @@ public class FindingPartyActivity extends AppCompatActivity {
                 history.insert("insert into HISTORY values(null,'" + resname + "','" + price + "','" + dateFormat.format(calendar.getTime()) + "')");
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                others = "m_id="+s_menu.get(0);
+                others = "m_id="+s_menu_id.get(0);
                 for(int i = 1; i< s_menu.size(); i++){
                     others += "&m_id=";
-                    others += s_menu.get(i);
+                    others += s_menu_id.get(i);
                 }
                 for(int i = 0; i< s_menu.size(); i++){
                     others += "&quantity=";
                     others += s_number.get(i);
                 }
-                new add_order().execute(p_name,l_name,resname,Integer.toString(Integer.parseInt(price)/parties.size()),others);
+                new add_order().execute(p_name,"A00002",resname,Integer.toString(Integer.parseInt(price)/parties.size()),others);
                 startActivity(intent);
                 FindingPartyActivity.this.finish();
             }
@@ -164,16 +168,12 @@ public class FindingPartyActivity extends AppCompatActivity {
             try {
                 String n_url = "http://uni07.unist.ac.kr/~cs20121092/html/add_order.php?";
                 String post_value = "p_name=" + info[0] + "&" +"lu_id=" +info[1]+ "&" +"r_name=" +info[2] + "&" +"price=" +info[3] + "&"+info[4];
-                Log.d("POST_VALUE", post_value);
+                Log.d("POST_VALUE_ADD_ORDER", post_value);
                 url = new URL(n_url+post_value);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setRequestMethod("GET");
-/*
-                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-                osw.write(post_value);
-                osw.flush();
-*/
+
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);
                 StringBuilder builder = new StringBuilder();
@@ -192,9 +192,71 @@ public class FindingPartyActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String result){
-            Log.e("RESULT",result);
+            Log.e("RESULT_ADD_ORDER",result);
             String jsonall = result;
             JSONArray jArray = null;
+            new getDebt().execute(p_name,"A00001",l_name);
+
+        }
+    }
+    public class getDebt extends AsyncTask<String,Void,String> {
+        String sResult="error";
+        @Override
+        protected String doInBackground(String... info) {
+            URL url = null;
+            try {
+                String n_url = "http://uni07.unist.ac.kr/~cs20121092/html/get_debt.php?";
+                String post_value = "p_name=" + info[0] +"&" +"u_id=" +info[1] + "&" +"lu_id=" +info[2];
+                Log.d("POST_VALUE_GETDEBT", post_value);
+
+                url = new URL(n_url+post_value);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+
+
+                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                BufferedReader reader = new BufferedReader(tmp);
+                StringBuilder builder = new StringBuilder();
+                String str;
+                while ((str = reader.readLine()) != null) {
+                    builder.append(str);
+                }
+                sResult = builder.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            return sResult;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            Log.e("RESULT_GETDEBT",result);
+            String jsonall = result;
+            JSONArray jArray = null;
+
+            try{
+                jArray = new JSONArray(jsonall);
+                JSONObject json_data = null;
+
+                for (int i = 0; i < jArray.length(); i++) {
+                    json_data = jArray.getJSONObject(i);
+                    f_name = json_data.getString("Name");
+                    debt = json_data.getString("Price");
+                    //items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min));
+                    Log.e("PROFILE",":"+i);
+                    Log.d("MY_FRIEND", "F_NAME = " + f_name + " DEBT = " + debt);
+
+                    manager_friend.distributeMoney(debt,f_name);
+                }
+                pList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }catch(Exception e){
+                e.printStackTrace();
+
+            }
 
         }
     }

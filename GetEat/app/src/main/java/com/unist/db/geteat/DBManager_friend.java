@@ -16,7 +16,7 @@ public class DBManager_friend extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE FRIEND( User_ID VARCHAR(60) PRIMARY KEY, Name VARCHAR(60),  Bank TEXT, Account TEXT, Debt TEXT);");
+        db.execSQL("CREATE TABLE FRIEND( User_ID VARCHAR(60) PRIMARY KEY, Name VARCHAR(60),  Bank TEXT, Account TEXT, Debt INTEGER);");
 
 
     }
@@ -32,7 +32,7 @@ public class DBManager_friend extends SQLiteOpenHelper {
     }
     public void insertAFriend(ArrayList<String> FriendDB) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO FRIEND VALUES('"+ FriendDB.get(0) + "', '" + FriendDB.get(1) + "', '" + FriendDB.get(2) + "', '" + FriendDB.get(3) + "', '" + FriendDB.get(4) + "');");
+        db.execSQL("INSERT INTO FRIEND VALUES('"+ FriendDB.get(0) + "', '" + FriendDB.get(1) + "', '" + FriendDB.get(2) + "', '" + FriendDB.get(3) + "', '" + Integer.parseInt(FriendDB.get(4)) + "');");
         db.close();
     }
     public void update(String _query) {
@@ -40,9 +40,21 @@ public class DBManager_friend extends SQLiteOpenHelper {
         db.execSQL(_query);
         db.close();
     }
-    public void distributeMoney(String debt, String p_name, String l_name) {
+    public void distributeMoney(String debt, String p_name) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("update FRIEND set Debt = '" + debt +"' where ");
+        Integer Origin = 0;
+        Cursor cursor = db.rawQuery("select Debt from FRIEND where Name = '" +p_name +"'", null);
+        while(cursor.moveToNext()) {
+            Origin = cursor.getInt(0);
+        }
+        Integer Total = Integer.parseInt(debt) + Origin;
+        db.execSQL("update FRIEND set Debt = '" + Total +"' where Name = '"+p_name +"'");
+        db.close();
+    }
+    public void endDebt(String name) {
+        SQLiteDatabase db = getWritableDatabase();
+        Integer zero = 0;
+        db.execSQL("update FRIEND set Debt = '" + zero +"' where Name = '" + name +"'");
         db.close();
     }
     public void delete(String _query) {

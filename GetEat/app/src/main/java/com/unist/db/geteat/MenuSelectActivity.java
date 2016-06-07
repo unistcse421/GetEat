@@ -52,12 +52,15 @@ public class MenuSelectActivity extends AppCompatActivity {
     String selected_category;
     String selected_menu="양념치";
     String selected_number="5";
+    String selected_id;
     ArrayList<String> s_number;
     ArrayList<String> s_menu;
+    ArrayList<String> s_menu_id;
     RelativeLayout add_btn;
 
     String resname;
     String res_id;
+    private String menu_id;
     String sum_string;
     int sum=0;
     int price;
@@ -88,6 +91,7 @@ public class MenuSelectActivity extends AppCompatActivity {
         number = new ArrayList<String>();
         orders = new ArrayList<OrderListItem>();
         s_menu = new ArrayList<String>();
+        s_menu_id = new ArrayList<String>();
         s_number = new ArrayList<String>();
         category.add("카테고리");
         menu_some.add("메뉴");
@@ -201,11 +205,18 @@ public class MenuSelectActivity extends AppCompatActivity {
                     intent.putExtra("resname", resname);
                     intent.putExtra("price", sum_string);
                     for(int i = 0; i<orders.size(); i++){
+                        for(int j = 0; j<menu.size(); j++){
+                            if(orders.get(i).menu_name.equals(menu.get(j).menu_name)){
+                                s_menu_id.add(menu.get(j).menu_id);
+                                break;
+                            }
+                        }
                         s_menu.add(orders.get(i).menu_name);
                         s_number.add(orders.get(i).menu_number);
                     }
                     intent.putStringArrayListExtra("s_menu", s_menu);
                     intent.putStringArrayListExtra("s_number",s_number);
+                    intent.putStringArrayListExtra("s_menu_id", s_menu_id);
                     intent.putExtra("phone_num", phone_num);
                     startActivity(intent);
                 }
@@ -265,6 +276,7 @@ public class MenuSelectActivity extends AppCompatActivity {
                     json_data = jArray.getJSONObject(i);
                     name = json_data.getString("Menu_Name");
                     menu_category = json_data.getString("Category");
+                    menu_id = json_data.getString("Menu_ID");
                     price = json_data.getString("Price");
                     for(int j=0;j<category.size();j++){
                         if(category.get(j).equals(menu_category)) flag = false;
@@ -273,7 +285,7 @@ public class MenuSelectActivity extends AppCompatActivity {
                         Log.e("COFIRM:", menu_category);
                         category.add(menu_category);
                     }
-                    menu.add(new MenuItem(menu_category,name,price));
+                    menu.add(new MenuItem(menu_category,name,price,menu_id));
 
                     Log.e("PROFILE",":"+i);
 

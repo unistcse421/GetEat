@@ -58,7 +58,7 @@ public class ResListAdapter extends ArrayAdapter<ResListItem> {
             //holder.res_distance = (TextView) v.findViewById(R.id.res_distance);
            // holder.res_waitpeople = (TextView) v.findViewById(R.id.res_waitpeople);
             holder.res_location = (TextView) v.findViewById(R.id.res_location);
-
+            holder.people_main = (TextView)v.findViewById(R.id.num_people_main);
             v.setTag(holder);
 
         }
@@ -76,6 +76,7 @@ public class ResListAdapter extends ArrayAdapter<ResListItem> {
             holder.res_imgurl = res_item.res_imgurl;
             holder.res_name.setText(res_item.res_name);
             holder.score_main.setText(res_item.score);
+            holder.people_main.setText(res_item.num_people);
             //holder.res_name.setTypeface(mTypeface);
             //holder.res_cuisine.setText(res_item.res_cuisine);
             //holder.res_cuisine.setTypeface(mTypeface);
@@ -111,5 +112,6 @@ public class ResListAdapter extends ArrayAdapter<ResListItem> {
         TextView res_waitpeople;
         TextView res_location;
         TextView score_main;
+        TextView people_main;
     }
 }
