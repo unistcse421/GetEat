@@ -15,10 +15,15 @@
 	*/
 	$now	= time();
 	$date	= date('Y-m-d H:i:s', $now);
-	$p_name = $_POST['p_name'];
-	$lu_id	= $_POST['lu_id'];
-	$r_name	= $_POST['r_name'];
-	$p		= $_POST['price'];		// = price/person
+//	$p_name = $_POST['p_name'];
+//	$lu_id	= $_POST['lu_id'];
+//	$r_name	= $_POST['r_name'];
+//	$p		= $_POST['price'];		// = price/person
+
+	$p_name = $_GET['p_name'];
+	$lu_id	= $_GET['lu_id'];
+	$r_name	= $_GET['r_name'];
+	$p		= $_GET['price'];		// = price/person
 
 	$input	= $_SERVER['QUERY_STRING'];		
 	$vars	= array();
@@ -31,7 +36,9 @@
 
 	$m_id	= $vars['m_id'];
 	$q		= $vars['quantity'];
-
+	echo $p_name.' '.$lu_id.' '.$r_name.' '.$p;
+	//echo $m_id;
+	echo $m_id[0], $q[0];
 	$db_host= "localhost";
 	$db_user= "cs20121092";
 	$db_pw  = "cs20121092";
@@ -40,6 +47,7 @@
 
 	// update party table
 	$query1 = "update party set Price = '$p' where Party_Name = '$p_name' and Leader_ID = '$lu_id'";
+	echo '<br>'.$query1.'</br>';
 	mysqli_query($conn, $query1);
 
 	// insert values in ordered table
