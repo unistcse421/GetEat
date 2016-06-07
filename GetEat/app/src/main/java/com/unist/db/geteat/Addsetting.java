@@ -126,15 +126,13 @@ public class Addsetting extends Activity {
         protected String doInBackground(String... info) {
             URL url = null;
             try {
-                url = new URL("http://uni07.unist.ac.kr/~cs20121092/html/add_user.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                conn.setRequestMethod("POST");
+                String n_url = "http://uni07.unist.ac.kr/~cs20121092/html/add_user.php?";
                 String post_value = "id=" + info[0] + "&" +"name=" +info[1] + "&" +"phone=" +info[2] + "&" +"account=" +info[3] + "&" +"bank=" +info[4];
                 Log.d("POST_VALUE", post_value);
-                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
-                osw.write(post_value);
-                osw.flush();
+                url = new URL(n_url+post_value);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
 
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);

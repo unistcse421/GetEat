@@ -157,16 +157,18 @@ public class FindingPartyActivity extends AppCompatActivity {
         protected String doInBackground(String... info) {
             URL url = null;
             try {
-                url = new URL("http://uni07.unist.ac.kr/~cs20121092/html/add_order.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-                conn.setRequestMethod("POST");
+                String n_url = "http://uni07.unist.ac.kr/~cs20121092/html/add_order.php?";
                 String post_value = "p_name=" + info[0] + "&" +"lu_id=" +info[1]+ "&" +"r_name=" +info[2] + "&" +"price=" +info[3] + "&"+info[4];
                 Log.d("POST_VALUE", post_value);
+                url = new URL(n_url+post_value);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("GET");
+/*
                 OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
                 osw.write(post_value);
                 osw.flush();
-
+*/
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);
                 StringBuilder builder = new StringBuilder();
