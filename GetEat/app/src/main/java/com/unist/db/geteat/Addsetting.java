@@ -2,6 +2,7 @@ package com.unist.db.geteat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +16,14 @@ import com.kakao.usermgmt.MeResponseCallback;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.UserProfile;
 
+import org.json.JSONArray;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -60,6 +67,7 @@ public class Addsetting extends Activity {
                 myData.add(phone.getText().toString());
                 myinfo.insertMyInfo(myData);
                 Toast.makeText(getApplicationContext(),"저장되었습니다",Toast.LENGTH_SHORT).show();
+                new add_user().execute(myData.get(0),myData.get(1),myData.get(4),myData.get(3),myData.get(2));
                 redirectMainActivity();
             }
         });
@@ -111,5 +119,47 @@ public class Addsetting extends Activity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    public class add_user extends AsyncTask<String,Void,String> {
+        String sResult="error";
+        @Override
+        protected String doInBackground(String... info) {
+            URL url = null;
+            try {
+                url = new URL("http://uni07.unist.ac.kr/~cs20121092/html/add_user.php");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                conn.setRequestMethod("POST");
+                String post_value = "id=" + info[0] + "&" +"name=" +info[1] + "&" +"phone=" +info[2] + "&" +"account=" +info[3] + "&" +"bank=" +info[4];
+                Log.d("POST_VALUE", post_value);
+                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+                osw.write(post_value);
+                osw.flush();
+
+                InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
+                BufferedReader reader = new BufferedReader(tmp);
+                StringBuilder builder = new StringBuilder();
+                String str;
+                while ((str = reader.readLine()) != null) {
+                    builder.append(str);
+                }
+                sResult = builder.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            return sResult;
+        }
+        @Override
+        protected void onPostExecute(String result){
+            Log.e("RESULT",result);
+            String jsonall = result;
+            JSONArray jArray = null;
+
+        }
+
+
     }
 }
