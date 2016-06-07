@@ -49,6 +49,7 @@ public class Mypage_tab3 extends BaseFragment_myPage {
     DBManager_update manager_update;
     DBManager_userinfo manager_userinfo;
 
+
     String nickName;
     String profileImageURL ;
     String thumbnailURL ;
@@ -59,7 +60,6 @@ public class Mypage_tab3 extends BaseFragment_myPage {
     ViewGroup container_g;
     Bundle savedInstanceState_g;
 
-    LinearLayout link_btn;
 
     static final String TAG = "tag.myPage_tab3";
     private ScrollView mScrollView;
@@ -85,23 +85,24 @@ public class Mypage_tab3 extends BaseFragment_myPage {
         if(manager.returnName().equals("nothing")) isQueue = false;
         else isQueue = true;
         if(isQueue){
+            Log.e("CHECK:","isQueue is true");
              view = inflater.inflate(R.layout.mypage_tab03_reserv, parent, false);
             mScrollView = findView(view, R.id.scroll_view_my_tab03);
-            RelativeLayout cancel_btn = (RelativeLayout) view.findViewById(R.id.cancel_btn);
+            cancel_btn = (TextView) view.findViewById(R.id.cancel_btn);
             resrv_time = (TextView) view.findViewById(R.id.resrv_time);
             resrv_rname= (TextView) view.findViewById(R.id.resrv_rname);
             resrv_name = (TextView) view.findViewById(R.id.resrv_name);
-            resrv_party = (TextView) view.findViewById(R.id.resrv_party);
+            //resrv_party = (TextView) view.findViewById(R.id.resrv_party);
             time_left = (TextView) view.findViewById(R.id.time_left);
             people_left = (TextView) view.findViewById(R.id.people_left);
 
             resrv_name.setText(nickName);
             resrv_time.setText(manager.returnTime());
             resrv_rname.setText(manager.returnName());
-            resrv_party.setText(manager.returnParty());
+            time_left.setText(manager.returnPrice());
+            //resrv_party.setText(manager.returnParty());
 
 
-            link_btn=(LinearLayout) view.findViewById(R.id.link_btn);
 
             cancel_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,7 +111,7 @@ public class Mypage_tab3 extends BaseFragment_myPage {
                     DBManager_regid manager_regid = new DBManager_regid(mContext,"regid_info.db",null,1);
 
                     Log.e("pass", manager.returnPid());
-                    new lineup_cancel().execute("out", manager.returnPid(), manager.returnDummyname(), manager_regid.returnRegid(), nickName);
+                    //new lineup_cancel().execute("out", manager.returnPid(), manager.returnDummyname(), manager_regid.returnRegid(), nickName);
                     manager.delete("delete from RESERV_INFO");
                     Intent intent = new Intent(mContext,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -118,26 +119,13 @@ public class Mypage_tab3 extends BaseFragment_myPage {
                     //onCreate(savedInstanceState);
                 }
             });
-            link_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        final KakaoLink kakaoLink = KakaoLink.getKakaoLink(mContext);
-                        final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-                        kakaoTalkLinkMessageBuilder.addText("Test");
-                        final String linkContents = kakaoTalkLinkMessageBuilder.build();
-                        kakaoLink.sendMessage(linkContents, mContext);
-                    } catch (KakaoParameterException e) {
-                        e.printStackTrace();
-                    }
 
-
-                }
-            });
 
 
         }else{
-            view = inflater.inflate(R.layout.mypage_tab03_reserv, parent, false);
+            Log.e("CHECK:","isQueue is false");
+
+            view = inflater.inflate(R.layout.mypage_tab03, parent, false);
             mScrollView = findView(view, R.id.scroll_view_my_tab03);
             //v = inflater.inflate(R.layout.tab2_reservation_info_blank,container,false);
 

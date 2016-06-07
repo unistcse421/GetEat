@@ -14,7 +14,7 @@ public class DBManager_reserv extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE RESERV_INFO( pid INTEGER PRIMARY KEY, res_name TEXT, party TEXT, dummy_name TEXT, res_time TEXT);");
+        sqLiteDatabase.execSQL("CREATE TABLE RESERV_INFO( pid INTEGER PRIMARY KEY, res_name TEXT,  price TEXT, res_time TEXT);");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class DBManager_reserv extends SQLiteOpenHelper {
         return str;
     }
 
-    public String returnParty() {
+    /*public String returnParty() {
         SQLiteDatabase db = getReadableDatabase();
         String str = "nothing";
 
@@ -62,7 +62,7 @@ public class DBManager_reserv extends SQLiteOpenHelper {
         }
 
         return str;
-    }
+    }*/
     public String returnName() {
         SQLiteDatabase db = getReadableDatabase();
         String str = "nothing";
@@ -74,11 +74,11 @@ public class DBManager_reserv extends SQLiteOpenHelper {
 
         return str;
     }
-    public String returnDummyname() {
+    public String returnPrice() {
         SQLiteDatabase db = getReadableDatabase();
         String str = "nothing";
 
-        Cursor cursor = db.rawQuery("select dummy_name from RESERV_INFO", null);
+        Cursor cursor = db.rawQuery("select price from RESERV_INFO", null);
         while(cursor.moveToNext()) {
             str = cursor.getString(0);
         }

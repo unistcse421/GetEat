@@ -80,8 +80,11 @@ public class FindingPartyActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DBManager_history history = new DBManager_history(getApplicationContext(), "history.db", null, 1);
+                DBManager_reserv manager_reserv = new DBManager_reserv(getApplicationContext(),"reserv_info.db",null,1);
+
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                manager_reserv.insert("insert into RESERV_INFO values(null,'"+resname+"','"+price+"','"+dateFormat.format(calendar.getTime())+"')");
                 history.insert("insert into HISTORY values(null,'" + resname + "','" + price + "','" + dateFormat.format(calendar.getTime()) + "')");
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

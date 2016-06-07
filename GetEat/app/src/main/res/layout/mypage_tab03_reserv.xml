@@ -8,17 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="500dp">
-        <LinearLayout
-            android:id="@+id/link_btn"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="150dp"
-            android:layout_height="50dp">
 
-
-        </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_centerInParent="true"
@@ -30,7 +20,7 @@
                 android:elevation="1dp"
                 android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="280dp">
+                android:layout_height="250dp">
                 <LinearLayout
                     android:paddingTop="10dp"
                     android:paddingLeft="40dp"
@@ -71,10 +61,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp">
                     <TextView
+                        android:background="@drawable/small_logo"
                         android:id="@+id/people_left"
                         android:textSize="70dp"
                         android:textColor="@color/maincolor"
-                        android:text="07"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -99,26 +89,7 @@
                         android:textColor="@color/black"
                         android:textSize="15dp"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rev_num"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"/>
-                    <TextView
-                        android:id="@+id/resrv_party"
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"/>
-                </LinearLayout>
+
                 <LinearLayout
                     android:paddingBottom="10dp"
                     android:gravity="center_horizontal"
@@ -142,7 +113,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/min"
+                        android:text="원"
                         android:textColor="@color/black"
                         android:textSize="15dp"/>
                 </LinearLayout>
@@ -155,7 +126,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
                 <RelativeLayout
-                    android:id="@+id/cancel_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageView

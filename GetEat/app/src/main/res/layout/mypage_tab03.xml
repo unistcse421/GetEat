@@ -14,7 +14,7 @@
             android:layout_height="200dp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="@string/no_rev"/>
+            android:text="주문 내역이 없습니다"/>
     </LinearLayout>
 
 </ScrollView>

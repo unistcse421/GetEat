@@ -220,7 +220,7 @@ public class ConfirmActivity extends Activity {
             Toast.makeText(getApplicationContext(), R.string.complete, Toast.LENGTH_SHORT).show();
             DBManager_reserv manager = new DBManager_reserv(getApplicationContext(), "reserv_info.db", null, 1);
             manager.insert("insert into RESERV_INFO values (" + Integer.getInteger(result) + ",'" + resname + "','"+party_num+"','" +dummy_name+ "','"+sdf.format(dt).toString()+"')");
-            Log.e("CONFIRM",":"+manager.returnPid()+" "+manager.returnName()+" "+manager.returnParty());
+            //Log.e("CONFIRM",":"+manager.returnPid()+" "+manager.returnName()+" "+manager.returnParty());
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
