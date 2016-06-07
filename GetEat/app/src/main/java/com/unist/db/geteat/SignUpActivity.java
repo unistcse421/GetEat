@@ -21,7 +21,15 @@ import com.kakao.util.helper.log.Logger;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
+import org.json.JSONArray;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by mintaewon on 2015. 10. 30..
@@ -281,5 +289,7 @@ public class SignUpActivity extends Activity {
         DBManager_regid manager = new DBManager_regid(getApplicationContext(), "regid_info.db", null, 1);
         manager.insert("insert into REGID_INFO values ('"+regid+"')");
     }
+
+
 
 }
