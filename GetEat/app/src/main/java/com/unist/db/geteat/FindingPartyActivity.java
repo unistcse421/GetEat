@@ -53,6 +53,7 @@ public class FindingPartyActivity extends AppCompatActivity {
     private ArrayList<PartyListItem> parties;
     private ArrayList<String> s_menu;
     private ArrayList<String> s_number;
+    DBManager_friend manager_friend;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +64,7 @@ public class FindingPartyActivity extends AppCompatActivity {
         phone_num = intent.getExtras().getString("phone_num");
         s_menu = intent.getExtras().getStringArrayList("s_menu");
         s_number = intent.getExtras().getStringArrayList("s_number");
+        manager_friend = new DBManager_friend(FindingPartyActivity.this,"FRIEND.db",null,1);
 
         pList = (ListView) findViewById(R.id.party_list_in_finding);
         parties = new ArrayList<PartyListItem>();

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kakao.auth.APIErrorResult;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String delivery = "-1";
     String desc = "-1";
     String res_id = null;
+    String score;
 
     String nickName;
     String profileImageURL ;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Switch switch_score;
     DBManager_reserv manager;
     private int clicked = -1;
-
+    TextView score_main;
     private DrawerLayout mDrawerLayout;
     private FrameLayout leftDrawer;
     @Override
@@ -221,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra("location", items.get(position).res_location);
                 intent.putExtra("phone_num", items.get(position).res_phone_num);
                 intent.putExtra("res_id",items.get(position).res_id);
-
+                intent.putExtra("score", items.get(position).score);
                 intent.putExtra("username", nickName);
 
                 startActivityForResult(intent, CALL_REQUEST);
@@ -468,7 +470,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Delivery_Fee = json_data.getString("Delivery_Fee");
                     Delivery_Min = json_data.getString("Delivery_Min");
                     res_id = json_data.getString("Rest_ID");
-                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id));
+                    score = json_data.getString("Score");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id,score));
                     Log.e("PROFILE",":"+i);
 
                 }
@@ -537,7 +540,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Delivery_Fee = json_data.getString("Delivery_Fee");
                     Delivery_Min = json_data.getString("Delivery_Min");
                     res_id = json_data.getString("Rest_ID");
-                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id));
+                    score = json_data.getString("Score");
+                    items.add(new ResListItem(img_large, name, cuisine, location, phone_num, start, end, Delivery_Fee, Delivery_Min,res_id,score));
                     Log.e("PROFILE",":"+i);
 
                 }

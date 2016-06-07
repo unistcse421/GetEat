@@ -66,11 +66,13 @@ public class RestaurantInfo extends BaseActivity {
     TextView resinfo_location;
     TextView resinfo_phone_num;
     TextView resinfo_webpage;
+    TextView resinfo_score;
     LinearLayout frame;
     ImageView star01, star02, star03, star04, star05;
     int width_image;
     int height_image;
     String rate ="0";
+    String score;
     String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class RestaurantInfo extends BaseActivity {
         end = intent.getExtras().getString("end");
         Delivery_Fee = intent.getExtras().getString("Delivery_Fee");
         Delivery_Min = intent.getExtras().getString("Delivery_Min");
-
+        score = intent.getExtras().getString("score");
         location = intent.getExtras().getString("location");
         phone_num = intent.getExtras().getString("phone_num");
         username = intent.getExtras().getString("username");
@@ -96,8 +98,8 @@ public class RestaurantInfo extends BaseActivity {
         resinfo_name = (TextView) findViewById(R.id.res_name);
         resinfo_name.setText(name);
         frame = (LinearLayout) findViewById(R.id.resinfo_frame);
-
-
+        resinfo_score = (TextView) findViewById(R.id.score_info);
+        resinfo_score.setText(score);
         final View header = findViewById(R.id.header);
         final TabsLayout tabs = findView(R.id.tabs);
         Bundle rb = new Bundle();

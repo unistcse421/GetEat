@@ -16,13 +16,14 @@ public class ResListItem extends ArrayList<ResListItem> {
     public String res_cuisine;
     public String res_phone_num;
     public String res_id;
+    public String score;
 
 
 
 
 
 
-    public ResListItem(String imgurl, String name, String cuisine, String location, String phone_num, String start, String end, String Delivery_Fee, String Delivery_Min,String res_id){
+    public ResListItem(String imgurl, String name, String cuisine, String location, String phone_num, String start, String end, String Delivery_Fee, String Delivery_Min,String res_id, String score){
         this.res_imgurl = imgurl;
         this.res_name = name;
         this.res_cuisine = cuisine;
@@ -33,5 +34,6 @@ public class ResListItem extends ArrayList<ResListItem> {
         this.res_location = location;
         this.res_phone_num = phone_num;
         this.res_id = res_id;
+        this.score = score;
     }
 }

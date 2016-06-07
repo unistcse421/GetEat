@@ -40,7 +40,11 @@ public class DBManager_friend extends SQLiteOpenHelper {
         db.execSQL(_query);
         db.close();
     }
-
+    public void distributeMoney(String debt, String p_name, String l_name) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("update FRIEND set Debt = '" + debt +"' where ");
+        db.close();
+    }
     public void delete(String _query) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(_query);
